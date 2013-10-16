@@ -1,0 +1,26 @@
+<h1>Listing vminfos</h1>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>vmName</th>
+      <th>Path</th>
+      <th>Ipaddress</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vminfos.each do |vminfo| %>
+      <tr>
+        <td><%= vminfo.name %></td>
+        <td><%= vminfo.path %></td>
+        <td><%= vminfo.ipaddress %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<!--
+<%= link_to 'New Vminfo', new_vminfo_path %>
+-->

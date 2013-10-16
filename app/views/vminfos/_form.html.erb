@@ -1,0 +1,29 @@
+<%= form_for(@vminfo) do |f| %>
+  <% if @vminfo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vminfo.errors.count, "error") %> prohibited this vminfo from being saved:</h2>
+
+      <ul>
+      <% @vminfo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :path %><br>
+    <%= f.text_field :path %>
+  </div>
+  <div class="field">
+    <%= f.label :ipaddress %><br>
+    <%= f.text_field :ipaddress %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

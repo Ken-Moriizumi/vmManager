@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @vminfo.name %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @vminfo.path %>
+</p>
+
+<p>
+  <strong>Ipaddress:</strong>
+  <%= @vminfo.ipaddress %>
+</p>
+
+<%= link_to 'Edit', edit_vminfo_path(@vminfo) %> |
+<%= link_to 'Back', vminfos_path %>
