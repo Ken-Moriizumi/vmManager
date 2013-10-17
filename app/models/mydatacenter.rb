@@ -8,31 +8,30 @@ class Mydatacenter
    def initialize
       vim = RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
       @dc ||= vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
-
       @vmArray ||= Array.new
       @fdArray ||= Array.new
       getVms
    end
 
    def search_vm_by_name(name)
-      @vmArray.each do |vmHash|
-        return vmHash if vmHash['obj'].name =~ /#{name}$/
+      @vmArray.each do |vm|
+        return vm if vm.name =~ /#{name}$/
       end
-      set_value_folderHash(nil,name)
+      nil
    end
 
 private
    def getVms
       init_search_place.each do |folder|
-          search_vms_by_folders folder
+          search_vms_from_folders folder
       end
    end
 
-   def search_vms_by_folders(folderHash)
+   def search_vms_from_folders(folderHash)
       folderHash['obj'].childEntity.each do |child|
          newFolderHash = set_value_folderHash(child,folderHash['fullName'] + "/" + child.name)
          @fdArray.push newFolderHash if /^Folder/  =~ child.to_s
-         @vmArray.push newFolderHash if /^VirtualMachine/  =~ child.to_s
+         @vmArray.push set_folderHash_to_myvminfo(newFolderHash) if /^VirtualMachine/  =~ child.to_s
       end
    end
    
@@ -43,6 +42,10 @@ private
 
    def set_value_folderHash(obj,fullName)
       {'obj' => obj, 'fullName' => fullName}
+   end
+
+   def set_folderHash_to_myvminfo(folderHash)
+      Myvminfo.new(folderHash['obj'],folderHash['fullName'])
    end
 end
 

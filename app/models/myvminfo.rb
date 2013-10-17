@@ -1,11 +1,13 @@
 class Myvminfo
 
-  attr_reader :name,:path,:ipaddress
+  attr_reader :vm, :name,:path,:ipaddress, :powerstatus
 
-  def initialize(name,path,ipaddress)
-      @name = name
+  def initialize(vm,path)
+      @vm = vm
+      @name = vm.name
       @path = path
-      @ipaddress = ipaddress
+      @ipaddress = vm.guest.ipAddress
+      @powerstatus = vm.runtime.powerState
   end
 
 end

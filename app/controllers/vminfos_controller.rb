@@ -5,12 +5,8 @@ class VminfosController < ApplicationController
   # GET /vminfos.json
   def index
     #@vminfos = Vminfo.all
-    @vminfos = Array.new
     myDc = Mydatacenter.new
-    vms = myDc.vmArray
-    vms.each do |vm|
-        @vminfos.push(Myvminfo.new(vm['obj'].name,vm['fullName'],vm['obj'].guest.ipAddress))
-    end
+    @vminfos = myDc.vmArray 
   end
 
   # GET /vminfos/1
