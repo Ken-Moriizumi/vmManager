@@ -47,3 +47,18 @@ end
 gem 'execjs'
 gem 'therubyracer'
 gem 'rbvmomi'
+
+group :development, :test do
+  gem 'spring'
+  gem 'rspec-rails'
+  gem 'cucumber-rails', require: false, git: 'https://github.com/cucumber/cucumber-rails.git'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
+
+  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i # OSXの場合のみ、ファイル変更検知のため（それ以外の環境ではポーリングになる）
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'guard-coffeescript' # app/assets以下はRailsが自動的にコンパイルしてくれるが、テスト用コードは対象外なので、これを入れる
+
+  gem 'capybara', git: 'https://github.com/jnicklas/capybara.git'
+end

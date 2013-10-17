@@ -18,7 +18,7 @@ class Mydatacenter
       @vmArray.each do |vmHash|
         return vmHash if vmHash['obj'].name =~ /#{name}$/
       end
-      {'obj' => nil ,'fullName' => "name"}
+      set_value_folderHash(nil,name)
    end
 
 private
@@ -30,17 +30,19 @@ private
 
    def search_vms_by_folders(folderHash)
       folderHash['obj'].childEntity.each do |child|
-         newFolderHash = Hash.new
-         newFolderHash['obj'] = child
-         newFolderHash['fullName'] = folderHash['fullName'] + "/" + child.name
+         newFolderHash = set_value_folderHash(child,folderHash['fullName'] + "/" + child.name)
          @fdArray.push newFolderHash if /^Folder/  =~ child.to_s
-         @vmArray.push( { 'obj' => child , 'fullName' => newFolderHash['fullName']}) if /^VirtualMachine/  =~ child.to_s
+         @vmArray.push newFolderHash if /^VirtualMachine/  =~ child.to_s
       end
    end
    
    def init_search_place
       folder = @dc.vmFolder
-      @fdArray.push({'obj' => folder ,'fullName' => ""})
+      @fdArray.push set_value_folderHash( folder ,"" )
+   end
+
+   def set_value_folderHash(obj,fullName)
+      {'obj' => obj, 'fullName' => fullName}
    end
 end
 
