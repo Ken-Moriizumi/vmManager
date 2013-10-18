@@ -1,5 +1,6 @@
-<h1>Listing vminfos</h1>
+<h1>ZR Vmware Control Tool</h1>
 
+<h2>VMs</h2>
 <table border=1>
   <thead>
     <tr>
@@ -8,23 +9,48 @@
       <th>PowerState</th>
       <th>IpAddress</th>
       <th>MacAddress</th>
+      <th colspan="3">Action</th>
     </tr>
   </thead>
 
   <tbody>
     <% @vminfos.each do |vminfo| %>
+    <% if !vminfo.isTemplate? %>
       <tr>
-        <td><%= vminfo.name %></td>
-        <td><%= vminfo.path %></td>
-        <td><%= vminfo.powerstatus %></td>
-        <td><%= vminfo.ipaddress %></td>
-        <td><%= vminfo.macaddress %></td>
+        <td><%=h vminfo.name %></td>
+        <td><%=h vminfo.path %></td>
+        <td><%=h vminfo.powerstatus %></td>
+        <td><%=h vminfo.ipaddress %></td>
+        <td><%=h vminfo.macaddress %></td>
+        <td><%=h link_to "Start" ,:action =>"poweron"  ,:name => vminfo.name %></td>
+        <td><%=h link_to "Shutdown" ,:action =>"poweroff" ,:name => vminfo.name %></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
 
+<h2>Templates</h2>
+<table border=1>
+  <thead>
+    <tr>
+      <th>VmName</th>
+      <th>Path</th>
+      <th colspan="1">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vminfos.each do |vminfo| %>
+    <% if vminfo.isTemplate? %>
+      <tr>
+        <td><%=h vminfo.name %></td>
+        <td><%=h vminfo.path %></td>
+        <td><%=h link_to "Migrate" ,:action =>"migrate"  ,:name => vminfo.name %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
 <br>
-<!--
-<%= link_to 'New Vminfo', new_vminfo_path %>
--->
+

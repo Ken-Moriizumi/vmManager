@@ -1,5 +1,15 @@
 MyCloud::Application.routes.draw do
-  resources :vminfos
+  resources :vminfos do
+    collection do
+     get 'poweron'
+     get 'poweroff'
+     get 'migrate'
+     post 'poweron'
+     post 'poweroff'
+     post 'migrate'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

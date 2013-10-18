@@ -9,6 +9,23 @@ class VminfosController < ApplicationController
     @vminfos = myDc.vmArray 
   end
 
+  def poweron
+    #@vminfos = Vminfo.all
+    myDc = Mydatacenter.new
+    vm = myDc.search_vm_by_name(params[:name])
+    vm.powerOn
+    @vminfos = myDc.vmArray 
+    render :action => "index"
+  end
+
+  def poweroff
+    #@vminfos = Vminfo.all
+    myDc = Mydatacenter.new
+    vm = myDc.search_vm_by_name(params[:name])
+    vm.powerOff
+    @vminfos = myDc.vmArray 
+    render :action => 'index'
+  end
   # GET /vminfos/1
   # GET /vminfos/1.json
   def show

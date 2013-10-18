@@ -6,8 +6,8 @@ class Mydatacenter
    attr_reader :vmArray
 
    def initialize
-      vim = RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
-      @dc ||= vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
+      $vim ||= RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
+      @dc ||= $vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
       @vmArray ||= Array.new
       @fdArray ||= Array.new
       getVms

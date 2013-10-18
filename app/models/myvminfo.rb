@@ -17,12 +17,12 @@ class Myvminfo
   end
 
   def powerOn
-      vm.PowerOnVM_Task.wait_for_completion
+      @vm.PowerOnVM_Task.wait_for_completion
       check_vm_powerStatus("poweredOn")
   end
   
   def powerOff
-      if @toolsstatul == "toolsOk"
+      if get_toolsStatus_from_vm == "toolsOk"
          @vm.ShutdownGuest
       else
          @vm.PowerOffVM_Task.wait_for_completion
