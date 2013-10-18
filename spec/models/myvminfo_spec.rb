@@ -29,9 +29,6 @@ describe Myvminfo do
           it "is テンプレート？" do
              @myvm.isTemplate?.should eq false
           end
-          it "MACアドレス is hoge" do
-             @myvm.macaddress.should eq "00:50:56:9b:4d:ce"
-          end
        end 
        context "テンプレートメンバの取得" do
           before do
@@ -39,6 +36,9 @@ describe Myvminfo do
           end
           it "is テンプレート？" do
              @myvmT.isTemplate?.should eq true
+          end
+          it "MACアドレス is 00:50:56:9b:4f:38" do
+             @myvmT.macaddress.should eq "00:50:56:9b:4f:38"
           end
        end 
     end
