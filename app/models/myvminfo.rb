@@ -1,6 +1,7 @@
 class Myvminfo
 
-  attr_reader :vm, :name,:path,:ipaddress, :powerstatus ,:macaddress ,:toolsstatus
+  attr_reader :vm, :name,:path,:ipaddress, :powerstatus ,:macaddress ,:toolsstatus ,:network
+
 
   def initialize(vm,path)
       @vm = vm
@@ -10,6 +11,7 @@ class Myvminfo
       get_powerStatus_from_vm
       get_macAddr_from_vm
       get_toolsStatus_from_vm 
+      get_network_from_vm 
   end
   
   def isTemplate?
@@ -60,5 +62,16 @@ private
   
   def get_ipAddr_from_vm
       @ipaddress = @vm.guest.ipAddress
+  end
+  
+  def get_network_from_vm
+      network = []
+      begin
+         @vm.network.each do |dev|
+             network.push dev.name
+         end
+      rescue
+      end
+      @network = network.join(',')
   end
 end

@@ -26,6 +26,9 @@ describe Myvminfo do
           it "電源状態 is poweredOn" do
              @myvm.powerstatus.should eq "poweredOn"
           end
+          it "ネットワークラベル is 仮想マシン ネットワーク" do
+             @myvm.network.should eq "仮想マシン ネットワーク"
+          end
           it "is テンプレート？" do
              @myvm.isTemplate?.should eq false
           end
