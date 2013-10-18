@@ -29,6 +29,9 @@ describe Myvminfo do
           it "is テンプレート？" do
              @myvm.isTemplate?.should eq false
           end
+          it "tools is toolsOk" do
+             @myvm.toolsstatus.should eq "toolsOk"
+          end
        end 
        context "テンプレートメンバの取得" do
           before do
@@ -39,6 +42,28 @@ describe Myvminfo do
           end
           it "MACアドレス is 00:50:56:9b:4f:38" do
              @myvmT.macaddress.should eq "00:50:56:9b:4f:38"
+          end
+       end 
+       
+       context "電源制御 on" do
+          before do
+             @myvmP = Myvminfo.new(@dc.find_vm("/検証用/hoge"),"/検証用/hoge")
+             @myvmP.powerOff if @myvmP.powerstatus == "poweredOn"
+          end
+          it "電源 on" do
+             @myvmP.powerOn
+             @myvmP.powerstatus.should eq "poweredOn"
+          end
+       end 
+
+       context "電源制御 off" do
+          before do
+             @myvmP = Myvminfo.new(@dc.find_vm("/検証用/hoge"),"/検証用/hoge")
+             @myvmP.powerOn if @myvmP.powerstatus == "poweredOff"
+          end
+          it "電源 off" do
+             @myvmP.powerOff
+             @myvmP.powerstatus.should eq "poweredOff"
           end
        end 
     end
