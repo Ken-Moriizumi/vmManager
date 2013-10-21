@@ -84,7 +84,7 @@ private
   def clone_vm_Task(cloneName)
       relocateSpec = RbVmomi::VIM.VirtualMachineRelocateSpec
       spec = RbVmomi::VIM.VirtualMachineCloneSpec(:location => relocateSpec, :powerOn => false, :template => self.isTemplate? )
-      clonedVm = @vm.CloneVM_Task(:folder => @vm.parent, :name => cloneName, :spec => spec).wait_for_completion
+      @vm.CloneVM_Task(:folder => @vm.parent, :name => cloneName, :spec => spec).wait_for_completion
   end
 
   def modify_from_template_to_vm(vm,dc)
