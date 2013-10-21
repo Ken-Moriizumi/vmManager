@@ -32,6 +32,12 @@ class Myvminfo
       check_vm_powerStatus("poweredOff")
   end
   
+  def clone_from_myself(cloneName,dc)
+      clonedVm = clone_vm_Task(cloneName)
+      modify_from_template_to_vm(clonedVm,dc)
+      Myvminfo.new(clonedVm,"/開発用/業務/#{name}")
+  end
+  
 private
   def check_vm_powerStatus(state)
       100.times do
@@ -73,5 +79,19 @@ private
       rescue
       end
       @network = network.join(',')
+  end
+  
+  def clone_vm_Task(cloneName)
+      relocateSpec = RbVmomi::VIM.VirtualMachineRelocateSpec
+      spec = RbVmomi::VIM.VirtualMachineCloneSpec(:location => relocateSpec, :powerOn => false, :template => self.isTemplate? )
+      clonedVm = @vm.CloneVM_Task(:folder => @vm.parent, :name => cloneName, :spec => spec).wait_for_completion
+  end
+
+  def modify_from_template_to_vm(vm,dc)
+      pool = nil
+      dc.hostFolder.childEntity.each do |ce|
+          pool = ce.resourcePool if ce.name == "Toshiba"
+      end
+      vm.MarkAsVirtualMachine({:pool => pool}) if self.isTemplate?
   end
 end

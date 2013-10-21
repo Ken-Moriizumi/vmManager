@@ -69,5 +69,18 @@ describe Myvminfo do
              @myvmP.powerstatus.should eq "poweredOff"
           end
        end 
+       
+      context "クローン時の挙動" do
+          before do
+             @myvmC = Myvminfo.new(@dc.find_vm("/開発用/業務/devServerXX_template"),"/開発用/業務/devServerXX_template")
+          end
+          it "クローンされたVMの名前が、devServerCloneXX01" do
+             clonedvm = @myvmC.clone_from_myself("devServerCloneXX01",@dc)
+             clonedvm.name.should eq "devServerCloneXX01"
+          end
+          after do
+             @dc.find_vm("/開発用/業務/devServerCloneXX01").Destroy_Task.wait_for_completion if @dc.find_vm("/開発用/業務/devServerCloneXX01")
+          end
+       end 
     end
 end
