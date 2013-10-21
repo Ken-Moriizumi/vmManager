@@ -4,9 +4,11 @@ MyCloud::Application.routes.draw do
      get 'poweron'
      get 'poweroff'
      get 'migrate'
+     get 'clone'
      post 'poweron'
      post 'poweroff'
      post 'migrate'
+     post 'clone'
     end
   end
 

@@ -26,6 +26,19 @@ class VminfosController < ApplicationController
     @vminfos = myDc.vmArray 
     render :action => 'index'
   end
+
+  def migrate
+    myDc = Mydatacenter.new
+    @vminfo = myDc.search_vm_by_name(params[:name])
+  end
+
+  def clone
+    myDc = Mydatacenter.new
+    @vminfo = myDc.search_vm_by_name(params[:vminfo][:name])
+    @vminfo.clone_from_myself("dev" + params[:newInfo][:cloneName],myDc.dc)
+    render :text => params
+  end
+
   # GET /vminfos/1
   # GET /vminfos/1.json
   def show

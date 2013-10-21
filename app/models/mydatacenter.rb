@@ -3,7 +3,7 @@ class Mydatacenter
    require 'rubygems'
    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
-   attr_reader :vmArray
+   attr_reader :vmArray,:dc
 
    def initialize
       $vim ||= RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
