@@ -64,3 +64,5 @@ group :development, :test do
 end
 
 gem 'sidekiq' 
+gem 'sinatra'
+gem 'slim'
