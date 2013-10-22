@@ -29,10 +29,8 @@ class VminfosController < ApplicationController
   end
 
   def clone
-    myDc = Mydatacenter.new
-    @vminfo = myDc.search_vm_by_name(params[:vminfo][:name])
-    @vminfo.clone_from_myself("dev" + params[:newInfo][:cloneName],myDc.dc)
-    render :text => params
+    CloneWorker.perform_async(params[:vminfo][:name], "dev" + params[:newInfo][:cloneName])
+    redirect_to :action => 'index'
   end
 
   # GET /vminfos/1
