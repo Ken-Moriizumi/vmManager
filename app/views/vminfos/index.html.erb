@@ -38,6 +38,7 @@
     <tr>
       <th>VmName</th>
       <th>Path</th>
+      <th>NetWork</th>
       <th colspan="1">Action</th>
     </tr>
   </thead>
@@ -48,6 +49,7 @@
       <tr>
         <td><%=h vminfo.name %></td>
         <td><%=h vminfo.path %></td>
+        <td><%=h vminfo.network %></td>
         <td><%=h link_to "Migrate" ,:action =>"migrate"  ,:name => vminfo.name %></td>
       </tr>
     <% end %>
