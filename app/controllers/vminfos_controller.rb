@@ -10,21 +10,17 @@ class VminfosController < ApplicationController
   end
 
   def poweron
-    #@vminfos = Vminfo.all
     myDc = Mydatacenter.new
     vm = myDc.search_vm_by_name(params[:name])
     vm.powerOn
-    @vminfos = myDc.vmArray 
-    render :action => "index"
+    redirect_to :action => 'index'
   end
 
   def poweroff
-    #@vminfos = Vminfo.all
     myDc = Mydatacenter.new
     vm = myDc.search_vm_by_name(params[:name])
     vm.powerOff
-    @vminfos = myDc.vmArray 
-    render :action => 'index'
+    redirect_to :action => 'index'
   end
 
   def migrate

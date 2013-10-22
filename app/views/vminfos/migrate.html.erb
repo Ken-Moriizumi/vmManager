@@ -10,15 +10,18 @@
   </div>
   <div class="field">
     <%= label_tag 'New Ip Addr:' %><br>
-    <%= text_field :newInfo, :ipaddr %> ※ インフラ管理Tに払いだしてもらって下さい
+    <%= text_field :newInfo, :ipaddr %> ※1
   </div>
   <div class="field">
     <%= label_tag 'Jenkins Slave Node Name:' %><br>
-    <%= text_field :newInfo, :jsnn %>※ Jenkins Slave Nodeを作成する時は入力（不明の場合は管理者に問い合わせて下さい）
+    <%= text_field :newInfo, :jsnn %> ※2
   </div>
   <div class="field">
     <%= label_tag 'Jenkins Slave Cecret:' %><br>
-    <%= text_field :newInfo, :jsc %> ※ Jenkins Slave Nodeを作成する時は入力（不明の場合は管理者に問い合わせて下さい）
+    <%= text_field :newInfo, :jsc %> ※2
   </div>
   <%= submit_tag('Clone!') %>
-<% end %>
+<% end %><br>
+※1 インフラTに払い出しもらって下さい<br>
+※2 Jenkins Slave Nodeを作成しない場合は不要（不明の場合は管理者に問い合わせて下さい）
+

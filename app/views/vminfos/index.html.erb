@@ -1,4 +1,4 @@
-<h1>ZR Vmware Control Tool</h1>
+<h1>ZR Cloud Tic Tool</h1>
 
 <h2>VMs</h2>
 <table border=1>
@@ -24,8 +24,8 @@
         <td><%=h vminfo.network %></td>
         <td><%=h vminfo.ipaddress %></td>
         <td><%=h vminfo.macaddress %></td>
-        <td><%=h link_to "Start" ,:action =>"poweron"  ,:name => vminfo.name %></td>
-        <td><%=h link_to "Shutdown" ,:action =>"poweroff" ,:name => vminfo.name %></td>
+        <td><%=h link_to "Start" ,:action =>"poweron"  ,:remote => true,:name => vminfo.name %></td>
+        <td><%=h link_to "Shutdown" ,:action =>"poweroff" ,:remote => true,:name => vminfo.name %></td>
       </tr>
     <% end %>
     <% end %>

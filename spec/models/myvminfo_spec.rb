@@ -3,8 +3,9 @@ require 'spec_helper'
 describe Myvminfo do
     describe "インスタンスの作成" do
        before do
-          vim = RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
-          @dc ||= vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
+          #vim = RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
+          #@dc ||= vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
+          @dc = Mydatacenter.new.dc
        end
 
        context "VMメンバの取得" do
