@@ -66,3 +66,5 @@ end
 gem 'sidekiq' 
 gem 'sinatra'
 gem 'slim'
+
+gem 'net-ssh'

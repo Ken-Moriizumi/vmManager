@@ -15,7 +15,8 @@ class Myvminfo
   end
   
   def isTemplate?
-      @vm.config.template
+      return "" if @vm.config.template.nil?
+      @vm.config.template 
   end
 
   def powerOn

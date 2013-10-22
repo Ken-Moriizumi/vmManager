@@ -29,7 +29,12 @@ class VminfosController < ApplicationController
   end
 
   def clone
-    CloneWorker.perform_async(params[:vminfo][:name], "dev" + params[:newInfo][:cloneName])
+    CloneWorker.perform_async(params[:vminfo][:name], 
+                              "dev" + params[:newInfo][:cloneName],
+                              params[:newInfo][:ipaddr],
+                              params[:newInfo][:jsnn],
+                              params[:newInfo][:jsc])
+    #SshWorker.perform_async(params[:newInfo][:cloneName],params[:newInfo][:ipaddr],params[:newInfo][:jsnn],params[:newInfo][:jsc])
     redirect_to :action => 'index'
   end
 
