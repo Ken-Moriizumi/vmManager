@@ -15,7 +15,7 @@ class Myvminfo
   end
   
   def isTemplate?
-      return "" if @vm.config.template.nil?
+      return true if @vm.config.nil?
       @vm.config.template 
   end
 

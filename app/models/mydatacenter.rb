@@ -24,7 +24,7 @@ class Mydatacenter
 
 private
    def get_connection_to_vCenter
-      $vim ||= RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
+      $vim ||= RbVmomi::VIM.connect host: Settings.vCenterName, user: Settings.vCenterUser, password: Settings.vCenterPass
       @dc ||= $vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
    end
 

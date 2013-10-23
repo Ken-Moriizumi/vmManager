@@ -1,0 +1,16 @@
+default: &default
+  vCenterName: '172.17.50.61'
+  vCenterUser: 'Administrator'
+  vCenterPass: '10Katu'
+  sshConAddr: '172.17.50.170'
+  sshConUser: 'root'
+  sshConPass: '10Katu'
+ 
+development:
+  <<: *default
+ 
+test:
+  <<: *default
+ 
+production:
+  <<: *default
