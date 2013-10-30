@@ -1,6 +1,6 @@
 class Myvminfo
 
-  attr_reader :vm, :name,:path,:ipaddress, :powerstatus ,:macaddress ,:toolsstatus ,:network
+  attr_reader :vm, :name,:path,:ipaddress, :powerstatus ,:macaddress ,:toolsstatus ,:network, :cpunum ,:memsize
 
 
   def initialize(vm,path)
@@ -12,6 +12,8 @@ class Myvminfo
       get_macAddr_from_vm
       get_toolsStatus_from_vm 
       get_network_from_vm 
+      get_cpunum_from_vm
+      get_memsize_from_vm
   end
   
   def isTemplate?
@@ -38,7 +40,16 @@ class Myvminfo
       modify_from_template_to_vm(clonedVm,dc)
       Myvminfo.new(clonedVm,"/開発用/業務/#{name}")
   end
-  
+
+  def reconfig_cpuname_to(cpunum = 1)
+     @vm.ReconfigVM_Task(:spec => RbVmomi::VIM.VirtualMachineConfigSpec(:numCPUs => cpunum)).wait_for_completion if get_powerStatus_from_vm == "poweredOff"
+     get_cpunum_from_vm
+  end
+
+  def reconfig_memsize_to(memsize = 1024)
+     @vm.ReconfigVM_Task(:spec => RbVmomi::VIM.VirtualMachineConfigSpec(:memoryMB => memsize)).wait_for_completion if get_powerStatus_from_vm == "poweredOff"
+     get_memsize_from_vm
+  end
 private
   def check_vm_powerStatus(state)
       100.times do
@@ -70,7 +81,7 @@ private
   def get_ipAddr_from_vm
       @ipaddress = @vm.guest.ipAddress
   end
-  
+
   def get_network_from_vm
       network = []
       begin
@@ -94,5 +105,13 @@ private
           pool = ce.resourcePool if ce.name == "Toshiba"
       end
       vm.MarkAsVirtualMachine({:pool => pool}) if self.isTemplate?
+  end
+  
+  def get_cpunum_from_vm
+      @cpunum = @vm.summary.config.numCpu
+  end
+  
+  def get_memsize_from_vm
+      @memsize = @vm.summary.config.memorySizeMB
   end
 end

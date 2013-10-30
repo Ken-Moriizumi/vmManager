@@ -3,8 +3,6 @@ require 'spec_helper'
 describe Myvminfo do
     describe "インスタンスの作成" do
        before do
-          #vim = RbVmomi::VIM.connect host: '172.17.50.61', user: 'Administrator', password: '10Katu'
-          #@dc ||= vim.serviceInstance.find_datacenter("ZR") or fail "datacenter not found"
           @dc = Mydatacenter.new.dc
        end
 
@@ -35,6 +33,12 @@ describe Myvminfo do
           end
           it "tools is toolsOk" do
              @myvm.toolsstatus.should eq "toolsOk"
+          end
+          it "cpunum is 2" do
+             @myvm.cpunum.should eq 2
+          end
+          it "memsize is 4096" do
+             @myvm.memsize.should eq 4096
           end
        end 
        context "テンプレートメンバの取得" do
@@ -71,16 +75,39 @@ describe Myvminfo do
           end
        end 
        
-      context "クローン時の挙動" do
+       context "クローン時の挙動" do
+           before do
+              @myvmC = Myvminfo.new(@dc.find_vm("/開発用/業務/devServerXX_template"),"/開発用/業務/devServerXX_template")
+           end
+           it "クローンされたVMの名前が、devServerCloneXX01" do
+              clonedvm = @myvmC.clone_from_myself("devServerCloneXX01",@dc)
+              clonedvm.name.should eq "devServerCloneXX01"
+           end
+           after do
+              @dc.find_vm("/開発用/業務/devServerCloneXX01").Destroy_Task.wait_for_completion if @dc.find_vm("/開発用/業務/devServerCloneXX01")
+           end
+       end 
+      
+       context "Reconfig時の挙動" do
           before do
-             @myvmC = Myvminfo.new(@dc.find_vm("/開発用/業務/devServerXX_template"),"/開発用/業務/devServerXX_template")
+             @myvmR = Myvminfo.new(@dc.find_vm("/検証用/hoge"),"/検証用/hoge")
+             @myvmR.powerOff if @myvmR.powerstatus != "poweredOff"
           end
-          it "クローンされたVMの名前が、devServerCloneXX01" do
-             clonedvm = @myvmC.clone_from_myself("devServerCloneXX01",@dc)
-             clonedvm.name.should eq "devServerCloneXX01"
+          it "CPU数を2に変更" do
+             @myvmR.reconfig_cpuname_to 2
+             @myvmR.cpunum.should eq 2 
           end
-          after do
-             @dc.find_vm("/開発用/業務/devServerCloneXX01").Destroy_Task.wait_for_completion if @dc.find_vm("/開発用/業務/devServerCloneXX01")
+          it "CPU数を1に変更" do
+             @myvmR.reconfig_cpuname_to 1
+             @myvmR.cpunum.should eq 1
+          end
+          it "メモリサイズを1024MBに変更" do
+             @myvmR.reconfig_memsize_to 1024
+             @myvmR.memsize.should eq  1024
+          end
+          it "メモリサイズを2048MBに変更" do
+             @myvmR.reconfig_memsize_to 2048
+             @myvmR.memsize.should eq  2048
           end
        end 
     end
