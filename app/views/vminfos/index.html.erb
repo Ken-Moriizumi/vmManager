@@ -28,8 +28,9 @@
         <td><%=h vminfo.macaddress %></td>
         <td><%=h vminfo.cpunum %></td>
         <td><%=h vminfo.memsize %></td>
-        <td><%=h link_to "Start" ,:action =>"poweron"  ,:remote => true,:name => vminfo.name %></td>
-        <td><%=h link_to "Shutdown" ,:action =>"poweroff" ,:remote => true,:name => vminfo.name %></td>
+        <td><%=h link_to "Start" ,:action =>"poweron"  ,:name => vminfo.name %></td>
+        <td><%=h link_to "Shutdown" ,:action =>"poweroff" ,:name => vminfo.name %></td>
+        <td><%=h link_to "Reconfig" ,:action =>"reconfig_edit" ,:name => vminfo.name %></td>
       </tr>
     <% end %>
     <% end %>
@@ -54,7 +55,11 @@
         <td><%=h vminfo.name %></td>
         <td><%=h vminfo.path %></td>
         <td><%=h vminfo.network %></td>
+        <% if vminfo.name =~ /devServerXX_template$/ then %>
         <td><%=h link_to "Migrate" ,:action =>"migrate"  ,:name => vminfo.name %></td>
+        <% else %>
+        <td></td>
+        <% end %>
       </tr>
     <% end %>
     <% end %>
