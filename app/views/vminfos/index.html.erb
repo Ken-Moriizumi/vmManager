@@ -3,9 +3,7 @@
   <thead>
     <tr>
       <th>VmName</th>
-      <th>Path</th>
       <th>PowerState</th>
-      <th>NetWork</th>
       <th>IpAddress</th>
       <th>MacAddress</th>
       <th>CpuNum</th>
@@ -18,10 +16,8 @@
     <% @vminfos.each do |vminfo| %>
     <% if !vminfo.isTemplate? %>
       <tr>
-        <td><%=h vminfo.name %></td>
-        <td><%=h vminfo.path %></td>
+        <td><%=raw vm_popup_content(vminfo) %></td>
         <td><%=h vminfo.powerstatus %></td>
-        <td><%=h vminfo.network %></td>
         <td><%=h vminfo.ipaddress %></td>
         <td><%=h vminfo.macaddress %></td>
         <td><%=h vminfo.cpunum %></td>
@@ -34,7 +30,6 @@
     <% end %>
   </tbody>
 </table>
-
 <h2>Templates</h2>
 <table class="table table-striped" border=1>
   <thead>
