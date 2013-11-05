@@ -25,6 +25,7 @@ class VminfosController < ApplicationController
 
   def migrate
     myDc = Mydatacenter.new
+    @vminfos = myDc.vmArray 
     @vminfo = myDc.search_vm_by_name(params[:name])
   end
 

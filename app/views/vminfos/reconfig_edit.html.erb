@@ -5,6 +5,9 @@
       <h2>Reconfig VM</h2>
    </div>
    <div class="modal-body">
+   <div class="alert alert-info">
+   サーバーが起動中の時合、再止されます。
+   </div>
       <%= form_tag('reconfig' ) do  %>
       
         <div class="field">
@@ -21,8 +24,10 @@
           <%= label_tag 'MemorySize(MB):' %>
           <%= select_tag :memsize , options_for_select( @mem_Select,@vminfo.memsize || 1024)  %>
         </div>
+   </div>
+   <div class="modal-footer">
         <%= button_tag('Cancel' ,{:class => "btn", :type => :reset ,"data-dismiss" => "modal"} )%>
         <%= submit_tag('Reconfig',:class => "btn btn-info") %>
-      <% end %><br>※1  サーバーが起動中の時合、再止されます。
+      <% end %>
    </div>
 </div>

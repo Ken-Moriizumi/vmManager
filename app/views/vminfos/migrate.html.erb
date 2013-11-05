@@ -1,27 +1,41 @@
-<%= form_tag('clone' ) do  %>
+<%=  render(:partial => 'vmtable') %>
+<div class="modal" id="loginModal">
+  <a href="#" class="close" data-dismiss="modal">&times;</a>
+   <div class="modal-header">
+      <h2>Migrate VM from template</h2>
+   </div>
+   <div class="modal-body">
+    <%= form_tag('clone' ) do  %>
+    
+      <div class="field">
+        <%= label_tag 'Template_vm_name:' %><br>
+        <%= text_field :vminfo , :name ,:readonly => true %>
+      </div>
+      <div class="field">
+        <%= label_tag 'New Server Name:' %><br>
+        dev<%= text_field :newInfo, :cloneName %> 
+      </div>
+      <div class="field">
+        <%= label_tag 'New Ip Addr:' %><br>
+        <%= text_field :newInfo, :ipaddr %> *1
+      </div>
+      <div class="field">
+        <%= label_tag 'Jenkins Slave Node Name:' %><br>
+        <%= text_field :newInfo, :jsnn %> *2
+      </div>
+      <div class="field">
+        <%= label_tag 'Jenkins Slave Cecret:' %><br>
+        <%= text_field :newInfo, :jsc %> *2
+      </div>
+   </div> 
+   <div class="alert alert-info">
+*1 管理者に払い出しもらって下さい<br>
+*2 Jenkins Slave Nodeを作成しない場合は不要<br>　　不明な場合は管理者に問い合わせて下さい
+   </div> 
+   <div class="modal-footer">
+      <%= button_tag('Cancel' ,{:class => "btn", :type => :reset ,"data-dismiss" => "modal"} )%>
+      <%= submit_tag('Clone',:class => "btn btn-info") %>
+    <% end %>
 
-  <div class="field">
-    <%= label_tag 'Template_vm_name:' %><br>
-    <%= text_field :vminfo , :name ,:readonly => true %>
-  </div>
-  <div class="field">
-    <%= label_tag 'New Server Name:' %><br>
-    dev<%= text_field :newInfo, :cloneName %> 
-  </div>
-  <div class="field">
-    <%= label_tag 'New Ip Addr:' %><br>
-    <%= text_field :newInfo, :ipaddr %> ※1
-  </div>
-  <div class="field">
-    <%= label_tag 'Jenkins Slave Node Name:' %><br>
-    <%= text_field :newInfo, :jsnn %> ※2
-  </div>
-  <div class="field">
-    <%= label_tag 'Jenkins Slave Cecret:' %><br>
-    <%= text_field :newInfo, :jsc %> ※2
-  </div>
-  <%= submit_tag('Clone!') %>
-<% end %><br>
-※1 インフラTに払い出しもらって下さい<br>
-※2 Jenkins Slave Nodeを作成しない場合は不要（不明の場合は管理者に問い合わせて下さい）
-
+   </div>
+</div>
