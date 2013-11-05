@@ -1,6 +1,6 @@
 module VminfosHelper
    def insert_popup_script()
-     javascript_tag( "$(function () { $('[rel=popover]').popover({html: true}); });")
+     javascript_tag( "$(function () { $('[rel=popover]').popover({html: true});$('#loginModal').modal(); });")
    end
 
    def vm_popup_content(vminfo)

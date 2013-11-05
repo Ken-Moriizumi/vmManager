@@ -1,19 +1,28 @@
-<h2>Reconfig : <%= @vminfo.name %></h2>
-
-<%= form_tag('reconfig' ) do  %>
-
-  <div class="field">
-    <%= hidden_field_tag(:vmname, @vminfo.name)  %>
-  </div>
-  <div class="field">
-    <%= label_tag 'CPUs:' %>
-    <%= select_tag :cpunum , options_for_select( @cpu_Select,@vminfo.cpunum || 1)  %>
-  </div>
-  <div class="field">
-    <%= label_tag 'MemorySize(MB):' %>
-    <%= select_tag :memsize , options_for_select( @mem_Select,@vminfo.memsize || 1024)  %>
-  </div>
-  <%= submit_tag('Reconfig') %>
-<% end %><br>
-※1  サーバーが起動中の時合、再止されます。
-
+ <%=  render(:partial => 'vmtable') %>
+<div class="modal" id="loginModal">
+  <a href="#" class="close" data-dismiss="modal">&times;</a>
+   <div class="modal-header">
+      <h2>Reconfig VM</h2>
+   </div>
+   <div class="modal-body">
+      <%= form_tag('reconfig' ) do  %>
+      
+        <div class="field">
+          <%= hidden_field_tag(:vmname, @vminfo.name)  %>
+        </div>
+        <div class="field">
+          <%= label_tag 'VMname:' %> <h5><%= @vminfo.name  %></h5>
+        </div>
+        <div class="field">
+          <%= label_tag 'CPUs:' %>
+          <%= select_tag :cpunum , options_for_select( @cpu_Select,@vminfo.cpunum || 1)  %>
+        </div>
+        <div class="field">
+          <%= label_tag 'MemorySize(MB):' %>
+          <%= select_tag :memsize , options_for_select( @mem_Select,@vminfo.memsize || 1024)  %>
+        </div>
+        <%= button_tag('Cancel' ,{:class => "btn", :type => :reset ,"data-dismiss" => "modal"} )%>
+        <%= submit_tag('Reconfig',:class => "btn btn-info") %>
+      <% end %><br>※1  サーバーが起動中の時合、再止されます。
+   </div>
+</div>

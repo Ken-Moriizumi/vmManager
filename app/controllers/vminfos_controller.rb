@@ -40,6 +40,7 @@ class VminfosController < ApplicationController
 
   def reconfig_edit
     myDc = Mydatacenter.new
+    @vminfos = myDc.vmArray 
     @vminfo = myDc.search_vm_by_name(params[:name])
     @cpu_Select = {"1" => 1, "2" => 2, "4" => 4}
     @mem_Select = {"512" => 512,"1024" => 1024,"2048" => 2048,"4096" => 4096}
