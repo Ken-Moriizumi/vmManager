@@ -17,7 +17,7 @@
     <% if !vminfo.isTemplate? %>
       <tr>
         <td><%=raw vm_popup_content(vminfo) %></td>
-        <td><%=h vminfo.powerstatus %></td>
+        <td><%=h power_badge_state vminfo.powerstatus %></td>
         <td><%=h vminfo.ipaddress %></td>
         <td><%=h vminfo.macaddress %></td>
         <td><%=h vminfo.cpunum %></td>

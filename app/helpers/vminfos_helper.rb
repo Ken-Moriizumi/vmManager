@@ -21,4 +21,15 @@ module VminfosHelper
         "
      }
    end
+
+   def power_badge_state(powerState)
+     color = if powerState == "poweredOn"
+        "badge-success"
+     elsif powerState == "poweredOff"
+        "badge-important"
+     else
+        "badge-warning"
+     end     
+     "<span class=\"badge #{color}\">#{powerState}</span>".html_safe
+   end
 end
