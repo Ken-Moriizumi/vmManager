@@ -1,0 +1,33 @@
+<h1>IpAddress</h1>
+
+<table class="table-condensed table-striped table-bordered" style="table-layout: auto;">
+  <thead>
+    <tr>
+      <th>IpAddress</th>
+      <th>ManageNo</th>
+      <th>MacAddress</th>
+      <th>Use</th>
+      <th>Remarks</th>
+      <th colspan="3">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ipaddrs.each do |ipaddr| %>
+      <tr>
+        <td><%= ipaddr.ipaddress %></td>
+        <td><%= ipaddr.manageno %></td>
+        <td><%= ipaddr.macaddress %></td>
+        <td><%= ipaddr.use %></td>
+        <td><%= ipaddr.remarks %></td>
+        <td><%= link_to 'Show', ipaddr %></td>
+        <td><%= link_to 'Edit', edit_ipaddr_path(ipaddr) %></td>
+        <td><%= link_to 'Destroy', ipaddr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ipaddr', new_ipaddr_path %>

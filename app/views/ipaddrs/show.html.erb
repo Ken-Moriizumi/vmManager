@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ipaddress:</strong>
+  <%= @ipaddr.ipaddress %>
+</p>
+
+<p>
+  <strong>Manageno:</strong>
+  <%= @ipaddr.manageno %>
+</p>
+
+<p>
+  <strong>Macaddress:</strong>
+  <%= @ipaddr.macaddress %>
+</p>
+
+<p>
+  <strong>Use:</strong>
+  <%= @ipaddr.use %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @ipaddr.remarks %>
+</p>
+
+<%= link_to 'Edit', edit_ipaddr_path(@ipaddr) %> |
+<%= link_to 'Back', ipaddrs_path %>

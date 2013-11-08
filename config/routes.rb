@@ -1,4 +1,6 @@
 MyCloud::Application.routes.draw do
+  resources :ipaddrs
+
   resources :vminfos do
     collection do
      get 'poweron'
