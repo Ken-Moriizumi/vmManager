@@ -8,6 +8,12 @@ class VminfosController < ApplicationController
     myDc = Mydatacenter.new
     @vminfos = myDc.vmArray 
   end
+ 
+  def templates
+    #@vminfos = Vminfo.all
+    myDc = Mydatacenter.new
+    @vminfos = myDc.vmArray 
+  end
 
   def poweron
     myDc = Mydatacenter.new

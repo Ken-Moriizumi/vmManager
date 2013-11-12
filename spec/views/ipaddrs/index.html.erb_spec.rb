@@ -6,6 +6,7 @@ describe "ipaddrs/index" do
       stub_model(Ipaddr,
         :ipaddress => "Ipaddress",
         :manageno => "Manageno",
+        :servername => "Servername",
         :macaddress => "Macaddress",
         :use => "Use",
         :remarks => "Remarks"
@@ -13,6 +14,7 @@ describe "ipaddrs/index" do
       stub_model(Ipaddr,
         :ipaddress => "Ipaddress",
         :manageno => "Manageno",
+        :servername => "Servername",
         :macaddress => "Macaddress",
         :use => "Use",
         :remarks => "Remarks"
@@ -25,6 +27,7 @@ describe "ipaddrs/index" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "tr>td", :text => "Ipaddress".to_s, :count => 2
     assert_select "tr>td", :text => "Manageno".to_s, :count => 2
+    assert_select "tr>td", :text => "Servername".to_s, :count => 2
     assert_select "tr>td", :text => "Macaddress".to_s, :count => 2
     assert_select "tr>td", :text => "Use".to_s, :count => 2
     assert_select "tr>td", :text => "Remarks".to_s, :count => 2

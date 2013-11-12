@@ -4,12 +4,14 @@ MyCloud::Application.routes.draw do
   resources :vminfos do
     collection do
      get 'poweron'
+     get 'templates'
      get 'poweroff'
      get 'migrate'
      get 'clone'
      get 'reconfig'
      get 'reconfig_edit'
      post 'poweron'
+     post 'templates'
      post 'poweroff'
      post 'migrate'
      post 'clone'

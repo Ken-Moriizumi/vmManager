@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108041137) do
+ActiveRecord::Schema.define(version: 20131111232045) do
 
   create_table "ipaddrs", force: true do |t|
     t.string   "ipaddress"
     t.string   "manageno"
+    t.string   "servername"
     t.string   "macaddress"
     t.string   "use"
     t.string   "remarks"

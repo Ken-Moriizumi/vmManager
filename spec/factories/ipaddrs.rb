@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :ipaddr do
     ipaddress "MyString"
     manageno "MyString"
+    servername "MyString"
     macaddress "MyString"
     use "MyString"
     remarks "MyString"

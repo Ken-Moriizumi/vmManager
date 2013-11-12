@@ -69,6 +69,6 @@ class IpaddrsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ipaddr_params
-      params.require(:ipaddr).permit(:ipaddress, :manageno, :macaddress, :use, :remarks)
+      params.require(:ipaddr).permit(:ipaddress, :manageno, :servername, :macaddress, :use, :remarks)
     end
 end
