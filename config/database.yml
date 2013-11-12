@@ -23,10 +23,12 @@ test: &test
   encoding: utf8
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: mysql2
+  database: myCloud
+  host: localhost
+  username: root
+  password: 
+  encoding: utf8
 
 cucumber:
   <<: *test
