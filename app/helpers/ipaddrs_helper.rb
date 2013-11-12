@@ -1,0 +1,2 @@
+module IpaddrsHelper
+end

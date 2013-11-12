@@ -1,0 +1,30 @@
+<h2>Templates</h2>
+<table class="table table-striped table-bordered" border=1>
+  <thead>
+    <tr>
+      <th>VmName</th>
+      <th>Path</th>
+      <th>NetWork</th>
+      <th colspan="1">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vminfos.each do |vminfo| %>
+    <% if vminfo.isTemplate? %>
+      <tr>
+        <td><%=h vminfo.name %></td>
+        <td><%=h vminfo.path %></td>
+        <td><%=h vminfo.network %></td>
+        <% if vminfo.name =~ /devServerXX_template$/ then %>
+        <td><%=h button_to "Migrate" ,{:action =>"migrate"  ,:name => vminfo.name},:class => "btn btn-info btn-small"  %></td>
+        <% else %>
+        <td></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
