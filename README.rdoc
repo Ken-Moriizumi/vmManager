@@ -1,16 +1,13 @@
-== README
+== Privateクラウド構築ツール 
 
-### private�N���E�h�\�z�c�[�� 
+= VMware環境専用です。
 
-* VMware����p�ł��B
+* 指定IPの設定
 
-** �w��IP�̐ݒ�
+* Jenkinsスレーブノードとして自動登録
 
-** Jenkins�X���[�u�m�[�h�Ƃ��Ď����o�^
+* テンプレートサーバからのマイグレーション
 
-** �e���v���[�g�T�[�o����̃}�C�O���[�V����
+* KVMもラッピングしたいな
 
-** KVM�����b�s���O��������
-
-�ڍׂ͏��т܂ŁB
-
+詳細は小林まで。
